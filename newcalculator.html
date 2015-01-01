@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	 <link href='http://fonts.googleapis.com/css?family=Roboto:400,100,300' rel='stylesheet' type='text/css'>
+	 <link rel="stylesheet" type="text/css" href="reset.css">
+	 <link rel="stylesheet" type="text/css" href="other.css">
+	 <link rel="stylesheet" href="calci.css">
+</head>
+<body>
+<div class = "outerBox">
+<div class = "topBar">
+<div class = "subBar" >
+<input type="text" name="display" id="screen" placeholder="88888888">
+</div>
+</div> 
+<div class = "button">
+    <input type="button" value="0">
+    <input type="button" value="1">
+    <input type="button" value="2">
+    <input type="button" value="3">
+    <input type="button" value="4">
+    <input type="button" value="5">
+    <input type="button" value="6">
+    <input type="button" value="7">
+    <input type="button" value="8">
+    <input type="button" value="9">
+    <input type="button" value="C">
+    <input type="button" value="M+">
+    <input type="button" value="M-">
+    <input type="button" value=".">
+    <input type="button" value="-">
+    <input type="button" value="+">
+    <input type="button" value="=">
+    <input type="button" value="X">
+    <input type="button" value="/">
+</div>  
+<script type="text/javascript">
+var ques_arr = [];
+$('input').click(function(){
+    var vall = $(this).val();
+    if(vall == 'C'){
+        $('input[name="display"]').val('');
+        ques_arr = [];
+    }
+    else if(vall == "M+" || vall == "M-"){
+        //do nothing
+    }
+    else if(vall == '='){
+        var op1 = "";
+        var op2 = "";
+        var opr ="";
+        var ans;
+        if (ques_arr.length==0){
+            $('input[name="display"]').val('ERROR');
+        }
+        else{
+            
+            for(i=0;i<ques_arr.length;i++){
+                var top = ques_arr.shift();
+                if(top=="X"||top=="+"||top=="/"||top=="-"){
+                    opr+=top;
+                    op2+=ques_arr.join('');
+                }
+                else{
+                    op1+=top;
+                }
+            }
+        switch(opr){
+                case 'X': ans = Number(op1)*Number(op2);
+                break;
+                case '+': ans = Number(op1)+Number(op2);
+                break;
+                case '/': ans = Number(op1)/Number(op2);
+                break;
+                case '-': ans = Number(op1)-Number(op2);
+                break;
+
+            }
+            $('input[name="display"]').val(ans);
+        }
+    }
+    else{
+    ques_arr.push(vall);
+    var str = ques_arr.join('');
+    $('input[name="display"]').val(str);
+    }
+
+});
+</script>
+</body>
+</html>

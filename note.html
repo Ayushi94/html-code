@@ -1,0 +1,125 @@
+<!DOCTYPE <!DOCTYPE html>
+<html>
+<head>
+	<title>Name</title>
+	<link rel="stylesheet" href="reset.css">
+	<link rel="stylesheet" href="other.css">
+	<link rel="stylesheet" href="note.css">
+	<script src="jquery-2.1.1.min.js"></script>
+</head>
+<body>
+<div class="outer_box">
+    <div class="text">
+	    <p>
+            Choose the Language
+        </p>
+        <ul>
+        </ul>
+    </div>
+    <div class="button">
+    <ul></ul>
+        <!--div class="button1">
+            <button type="button" value="mybutton1">C/C++</button>
+        </div>
+        <div class="button2">
+            <button type="button" value="mybutton2" onclick="analyze(value)">Fortran</button>
+        </div>
+        <div class="button3">
+            <button type="button" value="mybutton3" onclick="analyze(value)">Java</button>
+        </div>
+        <div class="button4">
+            <button type="button" value="mybutton4" onclick="analyze(value)">Python</button>
+        </div-->
+    </div>
+
+</div>
+<div class="description">
+    <!--div class="description1">
+	    <p>
+	        C++ (pronounced cee plus plus) is a general purpose programming language. It has imperative, object-oriented and generic programming features, while also providing the facilities for low level memory manipulation.
+	    </p>
+    </div>
+    <div class="description2">
+        <p>
+            Fortran (previously FORTRAN, derived from Formula Translating  System) is a general-purpose, imperative programming language that is especially suited to numeric computation and scientific computing. Originally developed by IBM in the 1950s for scientific and engineering applications, Fortran came to dominate this area of programming early on and has been in continuous use for over half a century in computationally intensive areas such as numerical weather prediction, finite element analysis, computational fluid dynamics, computational physics and computational chemistry. It is one of the most popular languages in the area of high-performance computing and is the language used for programs that benchmark and rank the world's fastest supercomputers.
+        </p>
+    </div>
+    <div class="description3">
+        <p>
+            Java is a computer programming language that is concurrent, class-based, object-oriented, and specifically designed to have as few implementation dependencies as possible. It is intended to let application developers "write once, run anywhere" (WORA), meaning that code that runs on one platform does not need to be recompiled to run on another. Java applications are typically compiled to bytecode (class file) that can run on any Java virtual machine (JVM) regardless of computer architecture. Java is, as of 2014, one of the most popular programming languages in use, particularly for client-server web applications, with a reported 9 million developers.[10][11] Java was originally developed by James Gosling at Sun Microsystems (which has since merged into Oracle Corporation) and released in 1995 as a core component of Sun Microsystems' Java platform. The language derives much of its syntax from C and C++, but it has fewer low-level facilities than either of them.
+        </p>
+    </div>
+    <div class="description4">
+	        Python is a widely used general-purpose, high-level programming language. Its design philosophy emphasizes code readability, and its syntax allows programmers to express concepts in fewer lines of code than would be possible in languages such as C. The language provides constructs intended to enable clear programs on both a small and large scale.
+    </div-->
+</div>
+<div class="Add">
+    <button onclick="add_click()">Add</button>
+</div>
+<div class="Info">
+    <h1>Add new Language</h1>
+	<div class="1"><input type="text" name="note_name" placeholder="Language"></div>
+	<div class="2"><textarea name="note_content" placeholder="Add language description"></textarea></div>
+</div>
+<div class="Save">
+    <button onclick="save_click()">Save</button>
+</div>
+<div class="back">
+    <button onclick="back_click()">Back</button>
+</div>
+<script>
+    note_arr_name = [];
+	note_arr_content = [];
+    $('.button').click(function(){
+        $('.outer_box').hide();
+    });
+    function back_click(){
+      	$('.back').hide();
+    	$('.Save').hide();
+    	$('.Add').show();
+    	$('.Info').hide();
+    	$('.description').hide();
+    	$('.display_list').show();
+    }
+    function add_click(){
+    	$('.back').show();
+    	$('.Info').show();
+    	$('.outer_box').hide();
+    	$('.Save').show();
+    	$('.description').hide();
+    	$('.Add').hide();
+    	$('input').val('');
+    	$(".button ul").on("click", "li", function(event){
+  		var index_number = $(this).attr('data-number');
+		$('.description ').html(note_arr_content[index_number]);
+    });
+    }
+    function save_click(){
+    	$('.back').hide();
+    	$('.Info').hide();
+    	$('.outer_box').show();
+    	$('.Save').hide();
+    	$('.description').hide();
+    	$('.Add').show();
+    	var name = $('input').val();
+		var content = $('textarea').val();
+		//alert(name+content);
+		note_arr_name.push(name);
+		note_arr_content.push(content);
+		$('.outer_box').show(display_list());
+    }
+    function display_list(){
+        $('.button ul').html("");
+        for(i=0;i<note_arr_content.length;i++){
+        	$('.button ul').append("<li data-number="+i+">"+note_arr_name[i]+"</li>");
+        }
+	}
+    $('.outer_box').ready(function(){
+        $('.back').hide();
+    	$('.Info').hide();
+    	$('.Save').hide();
+    	$('.description').hide();
+    });
+</script>
+</body>
+</html>
